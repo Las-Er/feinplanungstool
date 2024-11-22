@@ -1,0 +1,31 @@
+.venv/
+chatgpt_v02.py
+chatgpt.py
+disjunctive_model.py
+optimierung_einzelmaschine.py
+optimierung_mehrere_maschinen.py
+optimierung_neue_ansatz.py
+seminar_bsp.py
+test_min_leerlauf.py
+test.py
+test2.py
+test3.py
+test4.py
+time_indexed.py
+tmp.py
+unvolsstände_schritte_modellv3.py
+unvolsstände_schritte_modellv2.py
+unvolsstände_schritte_modell.py
+unvollständige_schritte_modellVCHATGPT.py
+Machine1
+Machine2
+Maschine3
+myLP.lp
+DMG-MORI - CTX Beta 800 V4
+DMG-MORI - DMU 65
+EXAPT-CAM 1
+EXAPT-CAM 2
+HELLER - HF 3500
+infeasible.ilp
+MAZAK - CV 500
+WEISSER - ARTERY
