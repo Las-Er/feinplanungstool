@@ -157,11 +157,21 @@ for j in jobs:
             )
 
 # Gesamte Dauer die benötigt wird um alle Schritte in einem Job zu erledigen
-for j in jobs: 
-    model.addConstr(
-                (gp.quicksum((t + (duration*job_quantity[j])) * x[j, m, tech, t] for tech, duration in job_process_order[j].items() for m in technology_allocation[tech] for t in time_period)) <= Jmax, 
-                name=f"jmax_{j}_{m}"
-            )
+# for j in jobs: 
+#     model.addConstr(
+#                 (gp.quicksum((t + (duration*job_quantity[j])) * x[j, m, tech, t] for tech, duration in job_process_order[j].items() for m in technology_allocation[tech] for t in time_period)) <= Jmax, 
+#                 name=f"jmax_{j}_{m}"
+#             )
+# for j in jobs: 
+#     for tech, duration in job_process_order[j].items():
+#         model.addConstr(
+#                     (gp.quicksum((t + (duration*job_quantity[j])) * x[j, m, tech, t] for m in technology_allocation[tech] for t in time_period)) <= Jmax, 
+#                     name=f"jmax_{j}_{m}"
+#                 )
+
+# Wenn Summe über alles gebildet wird, dann werden die Jobs so schnell wie möglich erledigt, aber die Gesamtdauer alle Jobs zu erledigen steigt. 
+# Im Vergleich zu der Herangehensweise eins drüber
+Jmax = gp.quicksum((t + (duration*job_quantity[j])) * x[j, m, tech, t] for j in jobs for tech, duration in job_process_order[j].items() for m in technology_allocation[tech] for t in time_period)
 
 # switch_amount = gp.quicksum(x[j, m, tech, t] for j in jobs for m in machines for tech in technologies for t in time_period)
 
@@ -170,7 +180,7 @@ energy_consumed = gp.quicksum(x[j, m, tech, t]*machine_energy_consumption[m] for
 # model.setObjective(Cmax, GRB.MINIMIZE)
 # model.setObjective(Cmax + energy_consumed, GRB.MINIMIZE)
 # model.setObjective(energy_consumed, GRB.MINIMIZE)
-model.setObjective(Cmax + energy_consumed + 100*Jmax, GRB.MINIMIZE)
+model.setObjective(Cmax + energy_consumed + Jmax, GRB.MINIMIZE) 
 # model.setObjective(Cmax + energy_consumed + 1000*penalty, GRB.MINIMIZE)
 # model.setObjective(Cmax + energy_consumed + 10*switch_amount, GRB.MINIMIZE)
 # model.setObjective(Cmax + switch_amount, GRB.MINIMIZE)
