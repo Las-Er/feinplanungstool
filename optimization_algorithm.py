@@ -4,10 +4,6 @@ import pandas as pd
 import tabulate
 import plotly.figure_factory as ff
 
-# Quelle:
-# https://tidel.mie.utoronto.ca/pubs/JSP_CandOR_2016.pdf
-# Genutzt wird das time indexed Modell
-
 machines = [0, 1, 2, 3, 4, 5, 6]
 machine_designations = {0: "EXAPT-CAM 1",   #CAM Vorbereitung
                         1: "EXAPT-CAM 2",   #CAM Vorbereitung
